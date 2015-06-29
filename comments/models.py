@@ -34,7 +34,7 @@ MAX_LENGTH = getattr(settings, "COMMENTS_MAX_LENGTH", 3000)
 def get_current_site():
     # for a rationale of this helper
     # https://docs.djangoproject.com/en/dev/topics/migrations/#migration-serializing
-    return Site.objects.get_current
+    return Site.objects.get_current()
 
 
 class CommentManager(models.Manager):
