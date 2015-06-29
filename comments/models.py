@@ -21,14 +21,11 @@
 # THE SOFTWARE.
 
 from __future__ import absolute_import, division, print_function, unicode_literals
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.sites.models import Site
 from fluo.db import models
-
-
-MAX_LENGTH = getattr(settings, "COMMENTS_MAX_LENGTH", 3000)
+from . import settings
 
 
 def get_current_site():
@@ -99,7 +96,7 @@ class CommentModel(models.TimestampModel):
     )
 
     comment = models.TextField(
-        max_length=MAX_LENGTH,
+        max_length=settings.MAX_LENGTH,
         verbose_name=_("comment"),
     )
 
