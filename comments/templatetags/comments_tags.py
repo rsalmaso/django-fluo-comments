@@ -22,10 +22,10 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 import hashlib
-import urllib
 from django.conf import settings
 from django import template
 from django.template import TemplateSyntaxError
+from django.utils.six.moves.urllib.parse import urlencode
 from django.utils.translation import ugettext as _
 from fluo.shortcuts import render_to_string
 
@@ -62,8 +62,8 @@ GRAVATAR_BASE_URL = {
 
 def _get_gravatar_image(request, comment, size, is_secure):
     base = GRAVATAR_BASE_URL[is_secure]
-    hash = hashlib.md5(comment.email).hexdigest()
-    query = urllib.urlencode({
+    hash = hashlib.md5(comment.email.encode("utf8")).hexdigest()
+    query = urlencode({
         "s": str(size),
         "r": GRAVATAR_RATING_G,
     })
