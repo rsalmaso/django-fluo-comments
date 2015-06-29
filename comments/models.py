@@ -119,6 +119,7 @@ class CommentModel(models.TimestampModel):
 
     class Meta:
         abstract = True
+        ordering = ["created_at"]
         permissions = [("can_moderate", "Can moderate comments")]
         verbose_name = _("comment")
         verbose_name_plural = _("comments")
