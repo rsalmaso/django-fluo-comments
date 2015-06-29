@@ -37,15 +37,22 @@ def get_current_site():
     return Site.objects.get_current()
 
 
-class CommentManager(models.Manager):
-    def in_moderation(self):
-        """
-        QuerySet for all comments currently in the moderation queue.
-        """
-        return self.get_query_set().filter(is_public=False, is_removed=False)
-
+class CommentQuerySet(models.QuerySet):
     def roots(self):
-        return self.filter(parent__isnull=True, is_public=True)
+        return self.filter(parent__isnull=True)
+
+    def public(self):
+        return self.filter(is_public=True)
+
+    def moderated(self):
+        return self.filter(is_public=False)
+
+    def removed(self):
+        return self.filter(is_removed=True)
+
+
+class CommentManager(models.Manager.from_queryset(CommentQuerySet)):
+    use_for_related_fields = True
 
 
 @python_2_unicode_compatible
