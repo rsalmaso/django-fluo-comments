@@ -166,7 +166,7 @@ def render_comment(parser, token, kwargs=None):
     args = token.split_contents()[1:]
     template_name = None
 
-    if args < 1:
+    if len(args) < 1:
         raise TemplateSyntaxError("'%s' requires at least 'as variable' (got %r)" % (self.tag_name, args))
     comment = args[0]
     if args == 3 and args[1] == "with":
