@@ -108,6 +108,7 @@ class CommentForm(BaseForm):
         if self.user.is_authenticated():
             comment.name = self.user.username
             comment.email = self.user.email
+            comment.user = self.user
         else:
             comment.name = self.cleaned_data.get("name")
             comment.email = self.cleaned_data.get("email")
