@@ -23,6 +23,10 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 from django.utils.translation import ugettext_lazy as _
 from fluo import forms
+from . import settings
+if settings.ENABLE_CAPTCHA:
+    # fail fast
+    from captcha import CaptchaField
 
 
 class Type(object):
@@ -94,6 +98,11 @@ class CommentForm(BaseForm):
         super(CommentForm, self).__init__(data, *args, **kwargs)
         self.fields["name"].required = False
         self.fields["email"].required = False
+        if settings.ENABLE_CAPTCHA:
+            self.fields["captcha"] = CaptchaField(
+                required=True,
+                label=_("Are you human?"),
+            )
         self.user = user
 
     def save(self, request, post, commit=True):
