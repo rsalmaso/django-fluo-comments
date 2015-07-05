@@ -22,12 +22,18 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 import hashlib
-from django.conf import settings
+from django.apps import apps
 from django import template
 from django.template import TemplateSyntaxError
 from django.utils.six.moves.urllib.parse import urlencode
 from django.utils.translation import ugettext as _
 from fluo.shortcuts import render_to_string
+from .. import settings
+
+if apps.is_installed('django.contrib.staticfiles'):
+    from django.contrib.staticfiles.templatetags.staticfiles import static as _static
+else:
+    from django.templatetags.static import static as _static
 
 register = template.Library()
 
@@ -60,17 +66,23 @@ GRAVATAR_BASE_URL = {
 }
 
 
+def _get_default_avatar_image(request, query, is_secure=False):
+    if settings.DEFAULT_IMAGE:
+        query["d"] = request.build_absolute_uri(_static(settings.DEFAULT_IMAGE))
+
+
 def _get_gravatar_image(request, comment, size, is_secure):
     base = GRAVATAR_BASE_URL[is_secure]
     hash = hashlib.md5(comment.email.encode("utf8")).hexdigest()
-    query = urlencode({
+    query = {
         "s": str(size),
         "r": GRAVATAR_RATING_G,
-    })
+    }
+    _get_default_avatar_image(request=request, query=query, is_secure=is_secure)
     url = "%(base)savatar/%(hash)s.png?%(query)s" % {
         "base": base,
         "hash": hash,
-        "query": query,
+        "query": urlencode(query),
     }
 
     return {

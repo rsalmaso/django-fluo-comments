@@ -26,3 +26,4 @@ from django.conf import settings
 AUTH_USER_MODEL = getattr(settings, "AUTH_USER_MODEL")
 MAX_LENGTH = getattr(settings, "COMMENTS_MAX_LENGTH", 3000)
 ENABLE_CAPTCHA = getattr(settings, "COMMENTS_ENABLE_CAPTCHA", True)
+DEFAULT_IMAGE = getattr(settings, "COMMENTS_DEFAULT_AVATAR", None)
