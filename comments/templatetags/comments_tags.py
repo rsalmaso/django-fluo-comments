@@ -163,6 +163,10 @@ class CommentNode(template.Node):
         self.template = template.Variable(template_name) if template_name else None
 
     def render(self, context):
+        from ..forms import Type
+        context["HANDLE"] = Type.HANDLE
+        context["MODERATE"] = Type.MODERATE
+        context["COMMENT"] = Type.COMMENT
         request = context["request"]
         comment = self.comment.resolve(context)
         template = self.template.resolve(context) if self.template else "blog/comment.html"
