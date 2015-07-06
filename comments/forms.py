@@ -23,7 +23,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 from django.utils.translation import ugettext_lazy as _
 from fluo import forms
-from . import conf as settings
+from .conf import settings
 if settings.ENABLE_CAPTCHA:
     # fail fast
     from captcha import CaptchaField

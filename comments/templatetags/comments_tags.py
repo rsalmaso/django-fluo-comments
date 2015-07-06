@@ -28,7 +28,7 @@ from django.template import TemplateSyntaxError
 from django.utils.six.moves.urllib.parse import urlencode
 from django.utils.translation import ugettext as _
 from fluo.shortcuts import render_to_string
-from .. import conf as settings
+from ..conf import settings
 
 if apps.is_installed('django.contrib.staticfiles'):
     from django.contrib.staticfiles.templatetags.staticfiles import static as _static
@@ -36,33 +36,12 @@ else:
     from django.templatetags.static import static as _static
 
 register = template.Library()
+GRAVATAR = settings.GRAVATAR
 
-GRAVATAR_URL = "http://www.gravatar.com/"
-GRAVATAR_SECURE_URL = "https://secure.gravatar.com/"
-
-# These options can be used to change the default image if no gravatar is found
-GRAVATAR_DEFAULT_IMAGE_404 = "404"
-GRAVATAR_DEFAULT_IMAGE_MYSTERY_MAN = "mm"
-GRAVATAR_DEFAULT_IMAGE_IDENTICON = "identicon"
-GRAVATAR_DEFAULT_IMAGE_MONSTER = "monsterid"
-GRAVATAR_DEFAULT_IMAGE_WAVATAR = "wavatar"
-GRAVATAR_DEFAULT_IMAGE_RETRO = "retro"
-
-# These options can be used to restrict gravatar content
-GRAVATAR_RATING_G = "g"
-GRAVATAR_RATING_PG = "pg"
-GRAVATAR_RATING_R = "r"
-GRAVATAR_RATING_X = "x"
-
-# Get user defaults from settings.py
-GRAVATAR_DEFAULT_SIZE = getattr(settings, "GRAVATAR_DEFAULT_SIZE", 80)
-GRAVATAR_DEFAULT_IMAGE = getattr(settings, "GRAVATAR_DEFAULT_IMAGE", GRAVATAR_DEFAULT_IMAGE_MYSTERY_MAN)
-GRAVATAR_DEFAULT_RATING = getattr(settings, "GRAVATAR_DEFAULT_RATING", GRAVATAR_RATING_G)
-GRAVATAR_DEFAULT_SECURE = getattr(settings, "GRAVATAR_DEFAULT_SECURE", True)
 
 GRAVATAR_BASE_URL = {
-    True: GRAVATAR_SECURE_URL,
-    False: GRAVATAR_URL,
+    True: GRAVATAR.SECURE_URL,
+    False: GRAVATAR.URL,
 }
 
 
@@ -76,7 +55,7 @@ def _get_gravatar_image(request, comment, size, is_secure):
     hash = hashlib.md5(comment.email.encode("utf8")).hexdigest()
     query = {
         "s": str(size),
-        "r": GRAVATAR_RATING_G,
+        "r": GRAVATAR.RATING_G,
     }
     _get_default_avatar_image(request=request, query=query, is_secure=is_secure)
     url = "%(base)savatar/%(hash)s.png?%(query)s" % {
@@ -137,7 +116,7 @@ def get_gravatar(parser, token):
     elif len(bits) == 5 and bits[3] != "as":
         raise TemplateSyntaxError(_("third argument must be 'as'"))
 
-    kwargs = { "comment": bits[1], "size": str(GRAVATAR_DEFAULT_SIZE) }
+    kwargs = { "comment": bits[1], "size": str(GRAVATAR.DEFAULT_SIZE) }
     if len(bits) == 5:
         kwargs["size"] = bits[2]
         kwargs["varname"] = bits[4]
@@ -148,7 +127,7 @@ def get_gravatar(parser, token):
 
 
 @register.inclusion_tag("comments/tags/gravatar.html", takes_context=True)
-def get_gravatar_image(context, comment, size=GRAVATAR_DEFAULT_SIZE):
+def get_gravatar_image(context, comment, size=GRAVATAR.DEFAULT_SIZE):
     """
     simple get_avatar shorcuts
     """

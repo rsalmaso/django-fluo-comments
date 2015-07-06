@@ -25,7 +25,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.sites.models import Site
 from fluo.db import models
-from . import conf as settings
+from .conf import settings
 
 
 def get_current_site():

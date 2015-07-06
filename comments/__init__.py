@@ -25,7 +25,7 @@ def get_comment_model():
     from django.conf import settings
     from django.apps import apps
 
-    app_label, model_name = settings.COMMENTS_MODEL.split('.')
+    app_label, model_name = settings.COMMENTS_SETTINGS['COMMENT_MODEL'].split('.')
     comment_model = apps.get_model(app_label=app_label, model_name=model_name)
     if comment_model is None:
         raise
