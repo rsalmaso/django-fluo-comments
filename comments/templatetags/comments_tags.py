@@ -28,7 +28,7 @@ from django.template import TemplateSyntaxError
 from django.utils.six.moves.urllib.parse import urlencode
 from django.utils.translation import ugettext as _
 from fluo.shortcuts import render_to_string
-from .. import settings
+from .. import conf as settings
 
 if apps.is_installed('django.contrib.staticfiles'):
     from django.contrib.staticfiles.templatetags.staticfiles import static as _static
