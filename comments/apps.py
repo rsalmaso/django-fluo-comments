@@ -21,17 +21,10 @@
 # THE SOFTWARE.
 
 from __future__ import absolute_import, division, print_function, unicode_literals
+from django.apps import AppConfig
+from django.utils.translation import ugettext_lazy as _
 
 
-default_app_config = "comments.apps.CommentsConfig"
-
-
-def get_comment_model():
-    from django.conf import settings
-    from django.apps import apps
-
-    app_label, model_name = settings.COMMENTS_SETTINGS['COMMENT_MODEL'].split('.')
-    comment_model = apps.get_model(app_label=app_label, model_name=model_name)
-    if comment_model is None:
-        raise
-    return comment_model
+class CommentsConfig(AppConfig):
+    name = "comments"
+    verbose_name = _("Comments")
