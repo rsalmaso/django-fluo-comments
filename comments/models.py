@@ -63,6 +63,7 @@ class CommentModel(models.TimestampModel):
     site = models.ForeignKey(
         Site,
         default=get_current_site,
+        on_delete=models.CASCADE,
         related_name="comments",
         verbose_name=_("site"),
     )
@@ -70,6 +71,7 @@ class CommentModel(models.TimestampModel):
         "self",
         blank=True,
         null=True,
+        on_delete=models.CASCADE,
         related_name="children",
         verbose_name=_("parent comment"),
     )
@@ -77,6 +79,7 @@ class CommentModel(models.TimestampModel):
         settings.AUTH_USER_MODEL,
         blank=True,
         null=True,
+        on_delete=models.CASCADE,
         related_name="%(class)s_comments",
         verbose_name=_("user"),
     )
