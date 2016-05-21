@@ -139,7 +139,7 @@ def get_gravatar_image(context, comment, size=GRAVATAR.DEFAULT_SIZE):
 class CommentNode(template.Node):
     def __init__(self, comment, template_name=None):
         self.comment = template.Variable(comment)
-        self.template = template.Variable(template_name) if template_name else None
+        self.template_name = template.Variable(template_name) if template_name else None
 
     def render(self, context):
         from ..forms import Type
@@ -148,8 +148,8 @@ class CommentNode(template.Node):
         context["COMMENT"] = Type.COMMENT
         request = context["request"]
         comment = self.comment.resolve(context)
-        template = self.template.resolve(context) if self.template else "blog/comment.html"
-        return render_to_string(template, request=request, comment=comment, form=context["form"])
+        template_name = self.template_name.resolve(context) if self.template_name else "blog/comment.html"
+        return render_to_string(template_name, request=request, comment=comment, form=context["form"])
 
 
 @register.tag
