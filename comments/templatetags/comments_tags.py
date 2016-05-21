@@ -25,9 +25,9 @@ import hashlib
 from django.apps import apps
 from django import template
 from django.template import TemplateSyntaxError
+from django.template.loader import render_to_string
 from django.utils.six.moves.urllib.parse import urlencode
 from django.utils.translation import ugettext as _
-from fluo.shortcuts import render_to_string
 from ..conf import settings
 
 if apps.is_installed('django.contrib.staticfiles'):
@@ -149,7 +149,10 @@ class CommentNode(template.Node):
         request = context["request"]
         comment = self.comment.resolve(context)
         template_name = self.template_name.resolve(context) if self.template_name else "blog/comment.html"
-        return render_to_string(template_name, request=request, comment=comment, form=context["form"])
+        return render_to_string(template_name, request=request, context={
+            "comment": comment,
+            "form": context["form"]
+        })
 
 
 @register.tag
