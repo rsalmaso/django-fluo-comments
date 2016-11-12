@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2007-2016, Raffaele Salmaso <raffaele@salmaso.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,7 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from __future__ import absolute_import, division, print_function, unicode_literals
 from django.utils.translation import ugettext_lazy as _
 from fluo import forms
 from .conf import settings
@@ -95,7 +92,7 @@ class CommentForm(BaseForm):
     )
 
     def __init__(self, data=None, user=None, *args, **kwargs):
-        super(CommentForm, self).__init__(data, *args, **kwargs)
+        super().__init__(data, *args, **kwargs)
         self.fields["name"].required = False
         self.fields["email"].required = False
         if settings.ENABLE_CAPTCHA:

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2007-2016, Raffaele Salmaso <raffaele@salmaso.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,9 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from __future__ import absolute_import, division, print_function, unicode_literals
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.sites.models import Site
 from fluo.db import models
 from .conf import settings
@@ -52,7 +48,6 @@ class CommentManager(models.Manager.from_queryset(CommentQuerySet)):
     use_for_related_fields = True
 
 
-@python_2_unicode_compatible
 class CommentModel(models.TimestampModel):
     """
     A user comment about some object.
