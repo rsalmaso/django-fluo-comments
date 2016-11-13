@@ -46,6 +46,7 @@ class CommentQuerySet(models.QuerySet):
 
 class CommentManager(models.Manager.from_queryset(CommentQuerySet)):
     use_for_related_fields = True
+    silence_use_for_related_fields_deprecation = True
 
 
 class CommentModel(models.TimestampModel):
@@ -121,6 +122,7 @@ class CommentModel(models.TimestampModel):
 
     class Meta:
         abstract = True
+        base_manager_name = "objects"
         ordering = ["created_at"]
         permissions = [("can_moderate", "Can moderate comments")]
         verbose_name = _("comment")
