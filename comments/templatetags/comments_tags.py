@@ -23,7 +23,7 @@ from django.apps import apps
 from django import template
 from django.template import TemplateSyntaxError
 from django.template.loader import render_to_string
-from django.utils.six.moves.urllib.parse import urlencode
+from django.utils.http import urlencode
 from django.utils.translation import gettext as _
 from ..conf import settings
 
