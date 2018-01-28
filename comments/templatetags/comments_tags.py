@@ -24,7 +24,7 @@ from django import template
 from django.template import TemplateSyntaxError
 from django.template.loader import render_to_string
 from django.utils.six.moves.urllib.parse import urlencode
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from ..conf import settings
 
 if apps.is_installed('django.contrib.staticfiles'):
