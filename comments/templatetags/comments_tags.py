@@ -19,15 +19,17 @@
 # THE SOFTWARE.
 
 import hashlib
-from django.apps import apps
+
 from django import template
+from django.apps import apps
 from django.template import TemplateSyntaxError
 from django.template.loader import render_to_string
 from django.utils.http import urlencode
 from django.utils.translation import gettext as _
+
 from ..conf import settings
 
-if apps.is_installed('django.contrib.staticfiles'):
+if apps.is_installed("django.contrib.staticfiles"):
     from django.contrib.staticfiles.templatetags.staticfiles import static as _static
 else:
     from django.templatetags.static import static as _static
@@ -81,18 +83,13 @@ class GravatarNode(template.Node):
         size = self.size.resolve(context)
         varname = self.varname.resolve(context)
         is_secure = request.META.get("wsgi.url_scheme") == "https"
-        context[varname] = _get_gravatar_image(
-            request=request,
-            comment=comment,
-            size=size,
-            is_secure=is_secure,
-        )
+        context[varname] = _get_gravatar_image(request=request, comment=comment, size=size, is_secure=is_secure)
         return ""
 
 
 @register.tag
 def get_gravatar(parser, token):
-    '''
+    """
     This tag is used for rendering an avatar icon, depending on user profile setting.
 
     Usage::
@@ -103,7 +100,7 @@ def get_gravatar(parser, token):
     Example::
         {% get_avatar user as avatar %}
         <img src="{{ avatar.src }}" width="{{ avatar.width }}" height="{{ avatar.height}}" alt=""/>
-    '''
+    """
     bits = token.contents.split()
     if len(bits) < 4 or len(bits) > 5:
         raise TemplateSyntaxError(_("get_avatar takes exactly four or five arguments"))
@@ -113,7 +110,7 @@ def get_gravatar(parser, token):
     elif len(bits) == 5 and bits[3] != "as":
         raise TemplateSyntaxError(_("third argument must be 'as'"))
 
-    kwargs = { "comment": bits[1], "size": str(GRAVATAR.DEFAULT_SIZE) }
+    kwargs = {"comment": bits[1], "size": str(GRAVATAR.DEFAULT_SIZE)}
     if len(bits) == 5:
         kwargs["size"] = bits[2]
         kwargs["varname"] = bits[4]
@@ -140,16 +137,14 @@ class CommentNode(template.Node):
 
     def render(self, context):
         from ..forms import Type
+
         context["HANDLE"] = Type.HANDLE
         context["MODERATE"] = Type.MODERATE
         context["COMMENT"] = Type.COMMENT
         request = context["request"]
         comment = self.comment.resolve(context)
         template_name = self.template_name.resolve(context) if self.template_name else "blog/comment.html"
-        return render_to_string(template_name, request=request, context={
-            "comment": comment,
-            "form": context["form"]
-        })
+        return render_to_string(template_name, request=request, context={"comment": comment, "form": context["form"]})
 
 
 @register.tag
@@ -158,11 +153,11 @@ def render_comment(parser, token, kwargs=None):
     render_comment comment
     render_comment comment with 'template.html'
     """
-    args = token.split_contents()[1:]
+    tag_name, *args = token.split_contents()
     template_name = None
 
     if len(args) < 1:
-        raise TemplateSyntaxError("'%s' requires at least 'as variable' (got %r)" % (self.tag_name, args))
+        raise TemplateSyntaxError("'%s' requires at least 'as variable' (got %r)" % (tag_name, args))
     comment = args[0]
     if args == 3 and args[1] == "with":
         template_name = args[2]

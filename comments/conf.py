@@ -23,7 +23,9 @@ from django.conf import settings as djsettings
 
 class Setting(dict):
     """ from http://stackoverflow.com/questions/3031219/python-recursively-access-dict-via-attributes-as-well-as-index-access """
+
     marker = object()
+
     def __init__(self, value=None):
         if value is None:
             pass
@@ -49,13 +51,13 @@ class Setting(dict):
     __getattr__ = __getitem__
 
 
-
 settings = Setting(getattr(djsettings, "COMMENTS_SETTINGS", {}))
 settings.setdefault("MAX_LENGTH", 3000)
 settings.setdefault("ENABLE_CAPTCHA", True)
 settings.setdefault("DEFAULT_AVATAR", None)
 if not settings.COMMENT_MODEL:
     from django.core.exceptions import ImproperlyConfigured
+
     raise ImproperlyConfigured("COMMENTS_SETTINGS does not have a COMMENT_MODEL field.")
 
 settings.setdefault("AUTH_USER_MODEL", getattr(djsettings, "AUTH_USER_MODEL"))

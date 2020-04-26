@@ -18,9 +18,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
+from django.utils.translation import gettext_lazy as _
 from fluo.db import models
+
 from .conf import settings
 
 
@@ -60,11 +61,7 @@ class CommentModel(models.TimestampModel):
     objects = CommentManager()
 
     site = models.ForeignKey(
-        Site,
-        default=get_current_site,
-        on_delete=models.CASCADE,
-        related_name="comments",
-        verbose_name=_("site"),
+        Site, default=get_current_site, on_delete=models.CASCADE, related_name="comments", verbose_name=_("site"),
     )
     parent = models.ForeignKey(
         "self",
@@ -82,36 +79,15 @@ class CommentModel(models.TimestampModel):
         related_name="%(class)s_comments",
         verbose_name=_("user"),
     )
-    user_name = models.CharField(
-        max_length=255,
-        blank=True,
-        verbose_name=_("user's name"),
-    )
-    user_email = models.EmailField(
-        max_length=255,
-        blank=True,
-        verbose_name=_("user's email address"),
-    )
-    user_url = models.URLField(
-        blank=True,
-        verbose_name=_("user's URL"),
-    )
+    user_name = models.CharField(max_length=255, blank=True, verbose_name=_("user's name"))
+    user_email = models.EmailField(max_length=255, blank=True, verbose_name=_("user's email address"))
+    user_url = models.URLField(blank=True, verbose_name=_("user's URL"))
 
-    comment = models.TextField(
-        max_length=settings.MAX_LENGTH,
-        verbose_name=_("comment"),
-    )
+    comment = models.TextField(max_length=settings.MAX_LENGTH, verbose_name=_("comment"))
 
-    notify_by_email = models.BooleanField(
-        default=True,
-        verbose_name=_("notify by email for updates"),
-    )
+    notify_by_email = models.BooleanField(default=True, verbose_name=_("notify by email for updates"))
 
-    ip_address = models.GenericIPAddressField(
-        blank=True,
-        null=True,
-        verbose_name=_("IP address"),
-    )
+    ip_address = models.GenericIPAddressField(blank=True, null=True, verbose_name=_("IP address"))
     is_public = models.BooleanField(
         default=True,
         help_text=_("Uncheck this box to make the comment effectively disappear from the site."),
@@ -119,7 +95,10 @@ class CommentModel(models.TimestampModel):
     )
     is_removed = models.BooleanField(
         default=False,
-        help_text=_("Check this box if the comment is inappropriate. A \"This comment has been removed\" message will be displayed instead."),
+        help_text=_(
+            "Check this box if the comment is inappropriate. A "
+            '"This comment has been removed" message will be displayed instead.'
+        ),
         verbose_name=_("is removed"),
     )
 
@@ -132,10 +111,7 @@ class CommentModel(models.TimestampModel):
         verbose_name_plural = _("comments")
 
     def __str__(self):
-        return "{name}: {comment}...".format(
-            name=self.name,
-            comment=self.comment[:50],
-        )
+        return "{name}: {comment}...".format(name=self.name, comment=self.comment[:50])
 
     @property
     def name(self):
@@ -168,11 +144,7 @@ class CommentModel(models.TimestampModel):
     @property
     def userinfo(self):
         if not hasattr(self, "_userinfo"):
-            userinfo = {
-                "name": self.user_name,
-                "email": self.user_email,
-                "url": self.user_url
-            }
+            userinfo = {"name": self.user_name, "email": self.user_email, "url": self.user_url}
             if self.user_id:
                 u = self.user
                 if u.email:

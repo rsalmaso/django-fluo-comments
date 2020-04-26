@@ -22,8 +22,8 @@ from .version import get_version
 
 VERSION = (0, 1, 0, "alpha", 0)
 
-__version__  = get_version(VERSION)
-__author__  = "Raffaele Salmaso"
+__version__ = get_version(VERSION)
+__author__ = "Raffaele Salmaso"
 __email__ = "raffaele@salmaso.org"
 
 
@@ -34,7 +34,7 @@ def get_comment_model():
     from django.conf import settings
     from django.apps import apps
 
-    app_label, model_name = settings.COMMENTS_SETTINGS['COMMENT_MODEL'].split('.')
+    app_label, model_name = settings.COMMENTS_SETTINGS["COMMENT_MODEL"].split(".")
     comment_model = apps.get_model(app_label=app_label, model_name=model_name)
     if comment_model is None:
         raise

@@ -20,7 +20,9 @@
 
 from django.utils.translation import gettext_lazy as _
 from fluo import forms
+
 from .conf import settings
+
 if settings.ENABLE_CAPTCHA:
     # fail fast
     from captcha import CaptchaField
@@ -33,11 +35,7 @@ class Type(object):
 
 
 class BaseForm(forms.Form):
-    type = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput,
-        label=_("Type"),
-    )
+    type = forms.CharField(required=False, widget=forms.HiddenInput, label=_("Type"))
 
 
 class HandleForm(BaseForm):
@@ -49,19 +47,12 @@ class HandleForm(BaseForm):
 
 
 class ModerateForm(BaseForm):
-    pk = forms.CharField(
-        required=True,
-        widget=forms.HiddenInput,
-        label=_("Comment pk"),
-    )
-    moderate = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput,
-        label=_("Moderate"),
-    )
+    pk = forms.CharField(required=True, widget=forms.HiddenInput, label=_("Comment pk"))
+    moderate = forms.CharField(required=False, widget=forms.HiddenInput, label=_("Moderate"))
 
     def save(self, request, post, commit=True):
         from . import get_comment_model
+
         Comment = get_comment_model()
         comment = Comment.objects.get(pk=self.cleaned_data.get("pk"))
         comment.is_removed = not comment.is_removed
@@ -71,39 +62,22 @@ class ModerateForm(BaseForm):
 
 
 class CommentForm(BaseForm):
-    parent = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput,
-    )
-    name = forms.CharField(
-        required=True,
-        max_length=255,
-        label=_("Your name:"),
-    )
-    email = forms.CharField(
-        required=True,
-        max_length=255,
-        label=_("Your email (will not show):"),
-    )
-    message = forms.CharField(
-        required=True,
-        widget=forms.Textarea,
-        label=_("Your message:"),
-    )
+    parent = forms.CharField(required=False, widget=forms.HiddenInput)
+    name = forms.CharField(required=True, max_length=255, label=_("Your name:"))
+    email = forms.CharField(required=True, max_length=255, label=_("Your email (will not show):"))
+    message = forms.CharField(required=True, widget=forms.Textarea, label=_("Your message:"))
 
     def __init__(self, data=None, user=None, *args, **kwargs):
         super().__init__(data, *args, **kwargs)
         self.fields["name"].required = False
         self.fields["email"].required = False
         if settings.ENABLE_CAPTCHA:
-            self.fields["captcha"] = CaptchaField(
-                required=True,
-                label=_("Are you human?"),
-            )
+            self.fields["captcha"] = CaptchaField(required=True, label=_("Are you human?"))
         self.user = user
 
     def save(self, request, post, commit=True):
         from . import get_comment_model
+
         Comment = get_comment_model()
         comment = Comment()
         pk = self.cleaned_data.get("parent", None)
