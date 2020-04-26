@@ -71,8 +71,8 @@ class CommentModel(models.TimestampModel):
         settings.AUTH_USER_MODEL,
         blank=True,
         null=True,
-        on_delete=models.CASCADE,
         related_name="%(class)s_comments",
+        on_delete=models.SET_NULL,
         verbose_name=_("user"),
     )
     user_name = models.CharField(max_length=255, blank=True, verbose_name=_("user's name"))
