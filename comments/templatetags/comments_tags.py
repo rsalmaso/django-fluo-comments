@@ -21,18 +21,13 @@
 import hashlib
 
 from django import template
-from django.apps import apps
 from django.template import TemplateSyntaxError
 from django.template.loader import render_to_string
+from django.templatetags.static import static as _static
 from django.utils.http import urlencode
 from django.utils.translation import gettext as _
 
 from ..conf import settings
-
-if apps.is_installed("django.contrib.staticfiles"):
-    from django.contrib.staticfiles.templatetags.staticfiles import static as _static
-else:
-    from django.templatetags.static import static as _static
 
 register = template.Library()
 GRAVATAR = settings.GRAVATAR
