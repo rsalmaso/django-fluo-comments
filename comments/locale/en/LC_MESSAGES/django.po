@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-09 16:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:42
+msgid "Type"
+msgstr "Type"
+
+#: forms.py:58
+msgid "Comment pk"
+msgstr "Comment pl"
+
+#: forms.py:63
+msgid "Moderate"
+msgstr "Moderate"
+
+#: forms.py:84
+msgid "Your name:"
+msgstr "Your name:"
+
+#: forms.py:89
+msgid "Your email (will not show):"
+msgstr "Your email (will not show):"
+
+#: forms.py:94
+msgid "Your message:"
+msgstr "Your message:"
+
+#: forms.py:104
+msgid "Are you human?"
+msgstr "Are you human?"
+
+#: models.py:67
+msgid "site"
+msgstr "site"
+
+#: models.py:74
+msgid "parent comment"
+msgstr "parent comment"
+
+#: models.py:81
+msgid "user"
+msgstr "user"
+
+#: models.py:86
+msgid "user's name"
+msgstr "user's name"
+
+#: models.py:91
+msgid "user's email address"
+msgstr "user's email address"
+
+#: models.py:95
+msgid "user's URL"
+msgstr "user's URL"
+
+#: models.py:100 models.py:128
+msgid "comment"
+msgstr "comment"
+
+#: models.py:105
+msgid "notify by email for updates"
+msgstr "notify by email for updates"
+
+#: models.py:111
+msgid "IP address"
+msgstr "IP address"
+
+#: models.py:115
+msgid ""
+"Uncheck this box to make the comment effectively disappear from the site."
+msgstr ""
+"Uncheck this box to make the comment effectively disappear from the site."
+
+#: models.py:116
+msgid "is public"
+msgstr "is public"
+
+#: models.py:120
+msgid ""
+"Check this box if the comment is inappropriate. A \"This comment has been "
+"removed\" message will be displayed instead."
+msgstr ""
+"Check this box if the comment is inappropriate. A \"This comment has been "
+"removed\" message will be displayed instead."
+
+#: models.py:121
+msgid "is removed"
+msgstr "is removed"
+
+#: models.py:129
+msgid "comments"
+msgstr "comments"
+
+#: models.py:144
+msgid ""
+"This comment was posted by an authenticated user and thus the name is read-"
+"only."
+msgstr ""
+"This comment was posted by an authenticated user and thus the name is read-"
+"only."
+
+#: models.py:154
+msgid ""
+"This comment was posted by an authenticated user and thus the email is read-"
+"only."
+msgstr ""
+"This comment was posted by an authenticated user and thus the email is read-"
+"only."
+
+#: templatetags/comments_tags.py:112
+msgid "get_avatar takes exactly four or five arguments"
+msgstr "get_avatar takes exactly four or five arguments"
+
+#: templatetags/comments_tags.py:115
+msgid "second argument must be 'as'"
+msgstr "second argument must be 'as'"
+
+#: templatetags/comments_tags.py:117
+msgid "third argument must be 'as'"
+msgstr "third argument must be 'as'"
