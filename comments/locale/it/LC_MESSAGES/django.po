@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-09 16:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:42
+msgid "Type"
+msgstr "Tipo"
+
+#: forms.py:58
+msgid "Comment pk"
+msgstr "ID del commento"
+
+#: forms.py:63
+msgid "Moderate"
+msgstr "Modera"
+
+#: forms.py:84
+msgid "Your name:"
+msgstr "Il tuo nome:"
+
+#: forms.py:89
+msgid "Your email (will not show):"
+msgstr "La tua email (non verrà visualizzata):"
+
+#: forms.py:94
+msgid "Your message:"
+msgstr "Il tuo messaggio:"
+
+#: forms.py:104
+msgid "Are you human?"
+msgstr "Sei umano?"
+
+#: models.py:67
+msgid "site"
+msgstr "sito"
+
+#: models.py:74
+msgid "parent comment"
+msgstr "commento genitore"
+
+#: models.py:81
+msgid "user"
+msgstr "utente"
+
+#: models.py:86
+msgid "user's name"
+msgstr "nome utente"
+
+#: models.py:91
+msgid "user's email address"
+msgstr "email utemte"
+
+#: models.py:95
+msgid "user's URL"
+msgstr "URL utente"
+
+#: models.py:100 models.py:128
+msgid "comment"
+msgstr "commento"
+
+#: models.py:105
+msgid "notify by email for updates"
+msgstr "notifica via email per le risposte"
+
+#: models.py:111
+msgid "IP address"
+msgstr "Indirizzo IP"
+
+#: models.py:115
+msgid ""
+"Uncheck this box to make the comment effectively disappear from the site."
+msgstr ""
+"Uncheck this box to make the comment effectively disappear from the site."
+
+#: models.py:116
+msgid "is public"
+msgstr "pubblico"
+
+#: models.py:120
+msgid ""
+"Check this box if the comment is inappropriate. A \"This comment has been "
+"removed\" message will be displayed instead."
+msgstr ""
+"Check this box if the comment is inappropriate. A \"This comment has been "
+"removed\" message will be displayed instead."
+
+#: models.py:121
+msgid "is removed"
+msgstr "commento rimosso"
+
+#: models.py:129
+msgid "comments"
+msgstr "commenti"
+
+#: models.py:144
+msgid ""
+"This comment was posted by an authenticated user and thus the name is read-"
+"only."
+msgstr ""
+"Questo commento è stato inviato da un utente autenticato, pertanto il nome è"
+"in sola lettura."
+
+#: models.py:154
+msgid ""
+"This comment was posted by an authenticated user and thus the email is read-"
+"only."
+msgstr ""
+"Questo commento è stato inviato da un utente autenticato, pertanto l'email è"
+"in sola lettura."
+
+#: templatetags/comments_tags.py:112
+msgid "get_avatar takes exactly four or five arguments"
+msgstr "get_avatar accetta quattro o cinque argomenti"
+
+#: templatetags/comments_tags.py:115
+msgid "second argument must be 'as'"
+msgstr "il secondo argomento deve essere 'as'"
+
+#: templatetags/comments_tags.py:117
+msgid "third argument must be 'as'"
+msgstr "il terzo argomento deve essere 'as'"
