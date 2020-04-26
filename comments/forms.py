@@ -85,7 +85,7 @@ class CommentForm(BaseForm):
             comment.parent = Comment.objects.get(pk=pk)
         comment.post = post
         comment.comment = self.cleaned_data.get("message")
-        if self.user.is_authenticated():
+        if self.user.is_authenticated:
             comment.name = self.user.username
             comment.email = self.user.email
             comment.user = self.user
