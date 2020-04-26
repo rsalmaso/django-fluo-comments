@@ -25,7 +25,7 @@ from .conf import settings
 
 if settings.ENABLE_CAPTCHA:
     # fail fast
-    from captcha import CaptchaField
+    from captcha.forms import CaptchaField
 
 
 class Type(object):
