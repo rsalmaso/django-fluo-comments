@@ -28,10 +28,7 @@ from .conf import settings
 def get_current_site():
     # for a rationale of this helper
     # https://docs.djangoproject.com/en/dev/topics/migrations/#migration-serializing
-    try:
-        return Site.objects.get_current()
-    except Site.DoesNotExist:
-        return None
+    return Site.objects.get_current()
 
 
 class CommentQuerySet(models.QuerySet):
